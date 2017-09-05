@@ -1,0 +1,93 @@
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_height="match_parent"
+    tools:context="com.example.joseph.shoper.CartFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="16dp"
+        android:layout_height="wrap_content">
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="100dp">
+           <ImageView
+               android:layout_width="60dp"
+               android:id="@+id/item_img"
+               android:layout_alignParentStart="true"
+               android:layout_alignParentTop="true"
+               android:scaleType="centerCrop"
+               android:adjustViewBounds="true"
+               android:src="@drawable/samsung"
+               android:layout_margin="10dp"
+               android:layout_height="match_parent" />
+           <TextView
+               android:layout_width="wrap_content"
+               android:id="@+id/item_name"
+               android:text="Galaxy S6"
+               android:fontFamily="serif"
+               android:textSize="16sp"
+               android:textStyle="bold"
+               android:layout_toRightOf="@id/item_img"
+               android:layout_alignParentTop="true"
+               android:layout_height="wrap_content" />
+           <TextView
+               android:layout_width="wrap_content"
+               android:text="Samsung"
+               android:id="@+id/item_brand"
+               android:layout_below="@id/item_name"
+               android:layout_alignLeft="@id/item_name"
+               android:layout_marginTop="10dp"
+               android:layout_marginBottom="10dp"
+               android:textSize="12sp"
+               android:textColor="@color/secondary_text"
+               android:layout_height="wrap_content" />
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textSize="16dp"
+               android:text="Ksh. 102,000"
+               android:layout_below="@id/item_brand"
+               android:textStyle="bold"
+               android:layout_alignLeft="@id/item_brand"
+
+               />
+           <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_alignParentEnd="true"
+               android:orientation="vertical"
+               android:layout_height="match_parent">
+               <ImageButton
+                   android:layout_width="wrap_content"
+                   android:src="@drawable/ic_add"
+                   android:background="?android:selectableItemBackground"
+                   android:layout_gravity="top"
+                   android:id="@+id/cart_add"
+                   android:layout_height="wrap_content" />
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="0"
+                   android:id="@+id/item_added"
+                   android:layout_gravity="center"
+                   android:layout_margin="10dp"
+                   />
+               <ImageButton
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/ic_remove"
+                   android:id="@+id/cart_remove"
+                   android:layout_gravity="bottom"
+                   android:background="?android:selectableItemBackground"
+                   />
+           </LinearLayout>
+       </RelativeLayout>
+
+    </LinearLayout>
+
+
+</android.support.v4.widget.NestedScrollView>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    android:layout_height="match_parent"
+    android:background="@color/primary"
+    tools:context="com.example.joseph.shoper.SignIn"
+    >
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
+        android:layout_alignParentTop="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:id="@+id/toolbar"
+            app:title="Sign Up"
+            app:titleMarginStart="50dp"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:layout_height="?attr/actionBarSize">
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_centerInParent="true"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:src="@drawable/ic_gen_user"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:civ_border_overlay="true"
+            android:layout_marginBottom="20dp"
+
+            android:layout_gravity="center_horizontal" />
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="0dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:background="#fff"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:inputType="textEmailAddress"
+                        android:hint="User Name"
+                        android:layout_margin="16dp"
+                        android:drawablePadding="10dp"
+                        android:background="#00000000"
+                        android:drawableStart="@drawable/ic_man_user"
+                        android:layout_height="wrap_content" />
+
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:inputType="textEmailAddress"
+                        android:hint="Email Address"
+                        android:layout_margin="16dp"
+                        android:drawablePadding="10dp"
+                        android:background="#00000000"
+                        android:drawableStart="@drawable/ic_mail"
+                        android:layout_height="wrap_content" />
+
+                </android.support.design.widget.TextInputLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <com.hbb20.CountryCodePicker
+                        android:id="@+id/input_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Phone"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginTop="16dp"
+                        app:ccp_defaultNameCode="KE"
+                        android:inputType="phone" />
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:drawablePadding="5dp"
+                            android:drawableStart="@drawable/ic_phone"
+                            android:inputType="phone"
+                            android:hint="Phone Number"
+                            android:background="#00000000"
+                            android:layout_height="wrap_content" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+                <!-- Password Label -->
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/secondary_text"
+                    >
+                    <android.support.design.widget.TextInputEditText android:id="@+id/input_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:drawableStart="@drawable/ic_key"
+                        android:drawablePadding="10dp"
+                        android:layout_margin="16dp"
+                        android:background="#00000000"
+                        android:hint="Password"/>
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <Button
+            android:layout_width="match_parent"
+            android:text="Sign Up"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn"
+            android:backgroundTint="#fff"
+            />
+    </LinearLayout>
+</RelativeLayout>
