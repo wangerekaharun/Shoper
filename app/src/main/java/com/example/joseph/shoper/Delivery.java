@@ -32,6 +32,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -48,6 +49,8 @@ public class Delivery extends AppCompatActivity implements OnMapReadyCallback, L
     private FusedLocationProviderClient mFusedLocationProviderClient;
     double lat, lon;
     private boolean mRequestLocationUpdates;
+    //marker refferance
+    Marker mMarker;
 
     //location call backs
     private LocationCallback mLocationCallBack;
@@ -142,6 +145,14 @@ public class Delivery extends AppCompatActivity implements OnMapReadyCallback, L
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode==LOCATION_REQUEST_CODE){
+            if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                createLocationRequest();
+                startLocationUpdates();
+            }else {
+                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},LOCATION_REQUEST_CODE);
+            }
+        }
 
     }
 
@@ -151,14 +162,22 @@ public class Delivery extends AppCompatActivity implements OnMapReadyCallback, L
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         if(mLastKnownLocation!=null){
             LatLng position=new LatLng(mLastKnownLocation.getLatitude(),mLastKnownLocation.getLongitude());
-            mGoogleMap.addMarker(new MarkerOptions().position(position));
+            mMarker= mGoogleMap.addMarker(new MarkerOptions().position(position));
             mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(position));
         }
     }
     public void updateMapMarker(){
         if(mLastKnownLocation!=null){
             LatLng position=new LatLng(mLastKnownLocation.getLatitude(),mLastKnownLocation.getLongitude());
-            mGoogleMap.addMarker(new MarkerOptions().position(position));
+            //check if the marker has been added
+            if(mMarker==null){
+                //adds new marker if none has already been added
+                mMarker= mGoogleMap.addMarker(new MarkerOptions().position(position));
+            }else {
+                //just update the marker position
+                mMarker.setPosition(position);
+            }
+            //update the camera so marker be arround the centre of the focus
             CameraPosition cameraPosition=new CameraPosition.Builder().target(position).zoom(13).tilt(90).build();
             //adds the zooming animation :-)
             mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
@@ -169,20 +188,18 @@ public class Delivery extends AppCompatActivity implements OnMapReadyCallback, L
     public void onLocationChanged(Location location) {
         mLastKnownLocation=location;
     }
-
+    //get location updates frequently
     protected void startLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+            //permision to access location not granted :-( ask user to grant
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},LOCATION_REQUEST_CODE);
             return;
+        }else {
+            //location is on so get updates
+            mFusedLocationProviderClient.requestLocationUpdates(mLocationRequest, mLocationCallBack, null);
+            mRequestLocationUpdates=true;
         }
-        mFusedLocationProviderClient.requestLocationUpdates(mLocationRequest, mLocationCallBack, null);
-        mRequestLocationUpdates=true;
+
     }
     //stop the updates when no longer needed
     //good candidate being when the app is being paused
