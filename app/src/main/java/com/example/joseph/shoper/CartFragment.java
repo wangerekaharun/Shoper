@@ -89,7 +89,11 @@ public class CartFragment extends Fragment {
         mOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getBaseContext().startActivity(new Intent(view.getContext(),Delivery.class));
+                //my correction
+                Intent intent= new Intent(getActivity(),Delivery.class);
+                startActivity(intent);
+
+                //getActivity().getBaseContext().startActivity(new Intent(view.getContext(),Delivery.class));
             }
         });
 
